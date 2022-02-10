@@ -18,6 +18,7 @@ let app = express();
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
+    methods:["GET", "POST", "PATCH", "DELETE"],
     origin: 'http://localhost:8080'
 }))
 
@@ -25,4 +26,4 @@ app.use(express.json())
 
 app.use('/api', routes)
 
-app.listen(8081);
+app.listen(5000);
