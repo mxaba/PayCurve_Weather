@@ -1,13 +1,13 @@
 <template>
-  <form>
+  <form @submit.prevent="submit">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" placeholder="name@example.com" required/>
+      <input v-model="data.email" type="email" class="form-control" placeholder="name@example.com" required/>
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" placeholder="Password" required/>
+      <input v-model="data.password" type="password" class="form-control" placeholder="Password" required/>
       <label for="floatingPassword">Password</label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
@@ -15,10 +15,37 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+
 export default {
-    name: "Login"
-}
+  name: "Register",
+  setup() {
+    const data = reactive({
+      email: "",
+      password: "",
+    });
+
+    const router = useRouter();
+
+    const submitFunction = async() => {
+      await fetch('http://localhost:8081/api/login', {
+        method: 'post',
+        headers: {'Content-Type':'application/json'},
+        credentials: 'include',
+        body: JSON.stringify(data)
+      });
+
+      await router.push('/');
+    }
+
+    return {
+      data,
+      submit: submitFunction
+    };
+  },
+};
 </script>
 
 

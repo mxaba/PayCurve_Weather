@@ -39,6 +39,7 @@
 
 <script lang="ts">
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "Register",
@@ -49,12 +50,16 @@ export default {
       password: "",
     });
 
+    const router = useRouter();
+
     const submitFunction = async() => {
       await fetch('http://localhost:8081/api/register', {
-        method: 'POST',
-        headers: {'Content-Tpe':'application/json'},
+        method: 'post',
+        headers: {'Content-Type':'application/json'},
         body: JSON.stringify(data)
       });
+
+      await router.push('/login');
     }
 
     return {
