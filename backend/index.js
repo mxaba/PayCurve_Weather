@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const routes = require('./routes/routes');
 
@@ -14,6 +15,7 @@ mongoose.connect(
 
 
 let app = express();
+app.use(cookieParser());
 app.use(cors({
     credentials: true,
     origin: 'https://localhost:8080'

@@ -18,6 +18,19 @@ router.post('/register', async(req, res) => {
     res.send(data);
 });
 
+router.get('/user', async(req, res) => {
+    const cookie = req.cookies['jwt']
+    const decodedJWT = jwt.verify(cookie, 'secretKeyStoring');
+
+    if(!decodedJWT){
+        return res.status(401).send({message: "You are not authorized"});
+    }
+
+    const user = await User.findOne({_id: decodedJWT._id})
+    const {password, ...data} = await user.toJSON();
+    res.send(data);
+});
+
 router.post('/login', async(req, res) => {
     const user = await User.findOne({email: req.body.email});
 
