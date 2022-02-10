@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const routes = require('./routes/routes');
+
 const mongodbURL = "mongodb+srv://PayCurve_Wether_App:PayCurve_Wether_App@paycurve-weather-app.2lr9s.mongodb.net/PayCurveWeatherApp?retryWrites=true&w=majority";
 mongoose.connect(
     mongodbURL,
@@ -12,8 +14,6 @@ mongoose.connect(
 
 let app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello');
-})
+app.use('/api', routes)
 
 app.listen(8080);
