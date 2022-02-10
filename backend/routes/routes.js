@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken');
+
 const User = require('./../models/user')
 
 router.post('/register', async(req, res) => {
@@ -27,7 +29,12 @@ router.post('/login', async(req, res) => {
         return res.status(404).send({message: "Password is incorrect"});
     }
 
-    res.send(user);
+    const token = jwt.sign({_id: user.id}, 'secretKeyStoring')
+    res.cookie('jwt', token, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000})
+
+    res.send({
+        message: 'Logged Successfully'
+    });
 });
 
 module.exports = router;
