@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const routes = require('./routes/routes');
 
@@ -13,9 +14,13 @@ mongoose.connect(
 
 
 let app = express();
+app.use(cors({
+    credentials: true,
+    origin: 'https://localhost:8080'
+}))
 
 app.use(express.json())
 
 app.use('/api', routes)
 
-app.listen(8080);
+app.listen(8081);
