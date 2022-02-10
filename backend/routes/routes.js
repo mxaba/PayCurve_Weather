@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('./../models/user')
 
-router.post('/register', async(req, res) => {
+router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt)
 
@@ -14,36 +14,47 @@ router.post('/register', async(req, res) => {
         password: hashedPassword,
     });
     const results = await user.save();
-    const {password, ...data} = await results.toJSON();
+    const { password, ...data } = await results.toJSON();
     res.send(data);
 });
 
-router.get('/user', async(req, res) => {
-    const cookie = req.cookies['jwt']
-    const decodedJWT = jwt.verify(cookie, 'secretKeyStoring');
+router.get('/user', async (req, res) => {
+    try {
+        const cookie = req.cookies['jwt']
+        const decodedJWT = jwt.verify(cookie, 'secretKeyStoring');
 
-    if(!decodedJWT){
-        return res.status(401).send({message: "You are not authorized"});
+        if (!decodedJWT) {
+            return res.status(401).send({ message: "You are not authorized" });
+        }
+
+        const user = await User.findOne({ _id: decodedJWT._id })
+        const { password, ...data } = await user.toJSON();
+        res.send(data);
+    } catch (error) {
+        return res.status(401).send({ message: "You are not authorized" });
     }
-
-    const user = await User.findOne({_id: decodedJWT._id})
-    const {password, ...data} = await user.toJSON();
-    res.send(data);
 });
 
-router.post('/login', async(req, res) => {
-    const user = await User.findOne({email: req.body.email});
+router.post('/logout', async (req, res) => {
+    res.cookie('jwt', '', { maxAge: 0 });
+    res.send({
+        message: 'Log out Successfully'
+    });
+});
 
-    if(!user) {
-        return res.status(404).send({message: "user not found"});
+router.post('/login', async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+        return res.status(404).send({ message: "user not found" });
     }
 
-    if(!await bcrypt.compare(req.body.password, user.password)){
-        return res.status(404).send({message: "Password is incorrect"});
+    if (!await bcrypt.compare(req.body.password, user.password)) {
+        return res.status(404).send({ message: "Password is incorrect" });
     }
 
-    const token = jwt.sign({_id: user.id}, 'secretKeyStoring')
-    res.cookie('jwt', token, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000})
+    const token = jwt.sign({ _id: user.id }, 'secretKeyStoring')
+    res.cookie('jwt', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
 
     res.send({
         message: 'Logged Successfully'
