@@ -1,6 +1,6 @@
 <template>
   <div class="error__wrapper">
-    <Search />
+    <Search @search="defaultSearch" @search-by-location="searchByLocation" />
     <Error />
   </div>
   {{ message }}
@@ -8,6 +8,8 @@
 
 <script lang="ts">
 import Search from "@/components/Search/Search.vue";
+import { BACKEND_URL } from "@/constraints";
+import { getCityNameByCoordinates } from "@/utility";
 
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
@@ -25,36 +27,11 @@ export default {
 
     onMounted(async () => {
       try {
-        const results = await fetch("http://localhost:5000/api/user", {
+        const results = await fetch(`${BACKEND_URL}/user`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
         });
-
-        const defaultSearch = async(query: string) => {
-          if (!query.trim().length) {
-            store.dispatch("setError", true);
-            return;
-          }
-
-          store.dispatch("setLoading", true);
-          try {
-            await store.dispatch("getCurrentWeather", query);
-
-            const { coord } = store.state.currentWeather;
-            await store.dispatch("getDailyWeather", {
-              lat: coord.lat,
-              lon: coord.lon,
-            });
-            await store.dispatch("getTimezone", { lat: coord.lat, lon: coord.lon });
-
-            store.dispatch("setError", false);
-          } catch {
-            store.dispatch("setError", true);
-          } finally {
-            store.dispatch("setLoading", false);
-          }
-        }
 
         const content = await results.json();
         if (results.status == 200) {
@@ -75,7 +52,56 @@ export default {
       }
     });
 
+    const defaultSearch = async (query: string) => {
+      if (!query.trim().length) {
+        store.dispatch("setError", true);
+        return;
+      }
+
+      store.dispatch("setLoading", true);
+      try {
+        await store.dispatch("getCurrentWeather", query);
+
+        const { coord } = store.state.currentWeather;
+        await store.dispatch("getDailyWeather", {
+          lat: coord.lat,
+          lon: coord.lon,
+        });
+        await store.dispatch("getTimezone", { lat: coord.lat, lon: coord.lon });
+
+        store.dispatch("setError", false);
+      } catch {
+        store.dispatch("setError", true);
+      } finally {
+        store.dispatch("setLoading", false);
+      }
+    };
+
+    defaultSearch("Cape Town");
+
+    async function searchByLocation() {
+      store.dispatch("setLoading", true);
+
+      if (!("geolocation" in navigator)) {
+        store.dispatch("setError", true);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        async ({ coords }) => {
+          const { address } = await getCityNameByCoordinates(coords);
+          return defaultSearch(address.city);
+        },
+        () => {
+          store.dispatch("setLoading", false);
+          store.dispatch("setError", true);
+        }
+      );
+    }
+
     return {
+      defaultSearch,
+      searchByLocation,
       message,
     };
   },
