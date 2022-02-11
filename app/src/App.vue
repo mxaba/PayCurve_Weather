@@ -1,11 +1,11 @@
 <template>
   <NavBar />
-  <main class="form-signin">
+  <div class="col-12">
     <router-view />
-  </main>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
 import NavBar from '@/components/NavBar';
 
 export default {

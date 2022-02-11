@@ -1,4 +1,6 @@
 <template>
+  <main class="form-signin">
+
   <form @submit.prevent="submit">
     <h1 class="h3 mb-3 fw-normal">Register</h1>
 
@@ -36,6 +38,7 @@
     <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
   </form>
+  </main>
 </template>
 
 <script lang="ts">

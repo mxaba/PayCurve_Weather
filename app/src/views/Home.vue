@@ -3,6 +3,8 @@
 <script lang="ts">
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
 export const namespaced = true;
 
 export default {
@@ -10,6 +12,7 @@ export default {
   setup() {
     const message = ref("You are not logged in!");
     const store = useStore();
+    const router = useRouter();
 
     onMounted(async () => {
       try {
@@ -29,6 +32,8 @@ export default {
             await store.dispatch("setIsAdmin", false);
           }
           await store.dispatch("setAuthentication", true);
+        } else {
+          await router.push('/error');
         }
       } catch (error) {
         await store.dispatch("setAuthentication", false);
