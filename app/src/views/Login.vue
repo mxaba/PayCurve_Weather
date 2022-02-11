@@ -33,6 +33,7 @@
 <script lang="ts">
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { BACKEND_URL } from '@/constraints';
 
 export default {
   name: "Register",
@@ -46,7 +47,7 @@ export default {
     const router = useRouter();
 
     const submitFunction = async () => {
-      const results = await fetch("http://localhost:5000/api/login", {
+      const results = await fetch(`${BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
