@@ -43,7 +43,7 @@ export default {
       });
       console.log(results);
       if(results.status == 200) {
-        await router.push('/');
+        await router.push('/home');
       } else {
         message.value = 'Invalid email-address or password!';
       }      

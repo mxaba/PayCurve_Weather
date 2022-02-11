@@ -6,11 +6,11 @@
 </template>
 
 <script lang="ts">
-import NavBar from '@/components/NavBar';
+import NavBar from "@/components/NavBar";
 
 export default {
-  components: {NavBar}
-}
+  components: { NavBar },
+};
 </script>
 
 <style>

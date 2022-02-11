@@ -1,6 +1,14 @@
-<template>{{ message }}</template>
+<template>
+<div class="error__wrapper">
+    <Search />
+    <Error />
+  </div>
+{{ message }}
+
+</template>
 
 <script lang="ts">
+
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
