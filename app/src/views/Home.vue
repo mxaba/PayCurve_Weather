@@ -8,6 +8,8 @@
 </template>
 
 <script lang="ts">
+import Search from "@/components/Search/Search.vue";
+
 
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
@@ -17,6 +19,7 @@ export const namespaced = true;
 
 export default {
   name: "Home",
+  components: { Search },
   setup() {
     const message = ref("You are not logged in!");
     const store = useStore();
