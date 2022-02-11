@@ -1,20 +1,23 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '@/views/Home.vue'
-import Register from '@/views/Register.vue'
-import Login from '@/views/Login.vue'
-import Error from '@/components/Error/Error.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import Home from "../views/Home.vue";
 
 const routes: Array<RouteRecordRaw> = [
-   { path: '/', component: Login},
-   { path: '/home', component: Home},
-    {path: '/register', component: Register},
-    {path: '/error', component: Error},
-    {path: '/login', component: Login}
-]
+  {
+    path: "/",
+    name: "Home",
+    component: Home,
+  },
+  {
+    path: "/daily",
+    name: "Daily",
+    component: () =>
+      import(/* webpackChunkName: "daily" */ "../views/Daily.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

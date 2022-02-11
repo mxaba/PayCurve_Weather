@@ -1,109 +1,90 @@
 <template>
-  <div class="error__wrapper">
-    <Search @search="defaultSearch" @search-by-location="searchByLocation" />
-    <Error />
+  <div class="home">
+    <div class="home__main">
+      <WeatherForecast
+        :iconCode="currentWeather.weather[0].icon"
+        :city="currentWeather.name"
+        :country="timezone.countryName"
+        :temperature="currentWeather.main.temp"
+        :iconDescription="currentWeather.weather[0].description"
+      />
+    </div>
+    <div class="home__additional">
+      <Weather :weather="dailyWeather.hourly" :timezone="timezone" />
+      <Info
+        :wind="currentWeather.wind.speed"
+        :pressure="currentWeather.main.pressure"
+        :humidity="currentWeather.main.humidity"
+        :cloudiness="currentWeather.clouds.all"
+      />
+    </div>
   </div>
-  {{ message }}
 </template>
 
+
 <script lang="ts">
-import Search from "@/components/Search/Search.vue";
-import { BACKEND_URL } from "@/constraints";
-import { getCityNameByCoordinates } from "@/utility";
-
-import { onMounted, ref } from "vue";
+import WeatherForecast from "@/components/home/WeatherForecast.vue";
+import Weather from "@/components/home/Weather/Weather.vue";
+import Info from "@/components/home/Info.vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
-
-export const namespaced = true;
-
-export default {
-  name: "Home",
-  components: { Search },
+import { defineComponent } from "vue";
+export default defineComponent({
+  components: {
+    WeatherForecast,
+    Weather,
+    Info
+  },
   setup() {
-    const message = ref("You are not logged in!");
     const store = useStore();
-    const router = useRouter();
+    const currentWeather = store.state.currentWeather;
+    const dailyWeather = store.state.dailyWeather;
+    const timezone = store.state.timezone;
 
-    onMounted(async () => {
-      try {
-        const results = await fetch(`${BACKEND_URL}/user`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-        });
+    return { currentWeather, dailyWeather, timezone };
+  }
+});
+</script>
 
-        const content = await results.json();
-        if (results.status == 200) {
-          message.value = `Hello ${content.name}`;
+<style lang="scss" scoped>
+.home__additional {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+}
 
-          if (content.email == "admin@admin.com") {
-            await store.dispatch("setIsAdmin", true);
-          } else {
-            await store.dispatch("setIsAdmin", false);
-          }
-          await store.dispatch("setAuthentication", true);
-        } else {
-          await router.push("/error");
-        }
-      } catch (error) {
-        await store.dispatch("setAuthentication", false);
-        await store.dispatch("setIsAdmin", false);
-      }
-    });
+@media all and (min-width: 1000px) {
+  .home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 90px 0;
 
-    const defaultSearch = async (query: string) => {
-      if (!query.trim().length) {
-        store.dispatch("setError", true);
-        return;
-      }
-
-      store.dispatch("setLoading", true);
-      try {
-        await store.dispatch("getCurrentWeather", query);
-
-        const { coord } = store.state.currentWeather;
-        await store.dispatch("getDailyWeather", {
-          lat: coord.lat,
-          lon: coord.lon,
-        });
-        await store.dispatch("getTimezone", { lat: coord.lat, lon: coord.lon });
-
-        store.dispatch("setError", false);
-      } catch {
-        store.dispatch("setError", true);
-      } finally {
-        store.dispatch("setLoading", false);
-      }
-    };
-
-    defaultSearch("Cape Town");
-
-    async function searchByLocation() {
-      store.dispatch("setLoading", true);
-
-      if (!("geolocation" in navigator)) {
-        store.dispatch("setError", true);
-        return;
-      }
-
-      navigator.geolocation.getCurrentPosition(
-        async ({ coords }) => {
-          const { address } = await getCityNameByCoordinates(coords);
-          return defaultSearch(address.city);
-        },
-        () => {
-          store.dispatch("setLoading", false);
-          store.dispatch("setError", true);
-        }
-      );
+    &__main {
+      transform: scale(1.7) translateY(-20px);
+      margin-right: 200px;
     }
 
-    return {
-      defaultSearch,
-      searchByLocation,
-      message,
-    };
-  },
-};
-</script>
+    &__additional {
+      transform: scale(1.1);
+    }
+  }
+
+  .additional-info {
+    transform: scale(1.1);
+    width: 105%;
+  }
+}
+
+@media all and (min-width: 1400px) {
+  .home__main {
+    margin-right: 270px;
+  }
+}
+
+@media all and (min-height: 1000px) {
+  .home {
+    margin: 150px 0;
+  }
+}
+</style>
