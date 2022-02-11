@@ -17,7 +17,7 @@ router.post('/register', async (req, res) => {
         const { password, ...data } = await results.toJSON();
         res.send(data);
     } catch (error) {
-        return res.status(404).send({ message: "User already exists"});
+        return res.status(400).send({ message: "User already exists"});
     }
 
 });
@@ -28,14 +28,14 @@ router.get('/user', async (req, res) => {
         const decodedJWT = jwt.verify(cookie, 'secretKeyStoring');
 
         if (!decodedJWT) {
-            return res.status(401).send({ message: "You are not authorized" });
+            return res.status(400).send({ message: "You are not authorized" });
         }
 
         const user = await User.findOne({ _id: decodedJWT._id })
         const { password, ...data } = await user.toJSON();
         res.send(data);
     } catch (error) {
-        return res.status(401).send({ message: "You are not authorized" });
+        return res.status(400).send({ message: "You are not authorized" });
     }
 });
 
@@ -50,11 +50,11 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
-        return res.status(404).send({ message: "user not found" });
+        return res.status(400).send({ message: "user not found" });
     }
 
     if (!await bcrypt.compare(req.body.password, user.password)) {
-        return res.status(404).send({ message: "Password is incorrect" });
+        return res.status(400).send({ message: "Password is incorrect" });
     }
 
     const token = jwt.sign({ _id: user.id }, 'secretKeyStoring')

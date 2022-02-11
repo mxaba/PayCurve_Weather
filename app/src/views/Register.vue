@@ -32,13 +32,14 @@
       />
       <label for="floatingPassword">Password</label>
     </div>
+    <p class="fw-normal text-danger">{{message}}</p>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
   </form>
 </template>
 
 <script lang="ts">
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -49,22 +50,28 @@ export default {
       email: "",
       password: "",
     });
+    const message = ref('');
 
     const router = useRouter();
 
     const submitFunction = async() => {
-      await fetch('http://localhost:5000/api/register', {
+      const results = await fetch('http://localhost:5000/api/register', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify(data)
       });
 
-      await router.push('/login');
+      if(results.status == 200) {
+        await router.push('/login');
+      } else {
+        message.value = 'The user is already register, You can login';
+      }
     }
 
     return {
       data,
-      submit: submitFunction
+      submit: submitFunction,
+      message
     };
   },
 };
