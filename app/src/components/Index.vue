@@ -52,7 +52,7 @@ export default defineComponent({
         if (results.status == 200) {
           console.log(`Hello ${content.name}`);
 
-          if (content.email == "admin@admin.com") {
+          if (content.role) {
             await store.dispatch("setIsAdmin", true);
           } else {
             await store.dispatch("setIsAdmin", false);
