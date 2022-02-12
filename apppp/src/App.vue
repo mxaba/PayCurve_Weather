@@ -1,18 +1,19 @@
 <template>
-  <Index />
+  <NavBar />
+  <div class="col-12">
+    <router-view />
+  </div>
 </template>
 
 <script lang="ts">
-import Index from "@/components/Index.vue";
+import NavBar from "@/components/NavBar";
+
 export default {
-  components: {
-    Index,
-  },
+  components: { NavBar },
 };
 </script>
 
-<style lang="css">
-
+<style>
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -40,13 +41,13 @@ export default {
   border-top-right-radius: 0;
 }
 
+@import url("https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap");
+
 body {
   padding: 0;
   margin: 0;
-  min-height: 100vh;
   overflow-x: hidden;
-  background-color: rgb(255, 255, 255);
-  display: flex;
+  background-color: rgb(241, 239, 239);
   justify-content: center;
   align-items: center;
   flex-flow: column wrap;
@@ -60,6 +61,18 @@ body {
 
 button:focus {
   outline: 1px solid #000;
+}
+
+#app::after {
+  z-index: -5;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 90vh solid #ebedf1;
+  border-right: 100vw solid transparent;
+  top: 0;
+  left: 0;
 }
 
 </style>

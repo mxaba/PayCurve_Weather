@@ -1,7 +1,6 @@
 <template>
   <div class="error__wrapper__text">
-    Niestety <span class="not-found">nie znaleziono</span> tego, czego szukasz
-    lub wystąpił <span class="error">błąd</span>, spróbuj ponownie!
+    Unfortunately the place entered could not be found! Search Again!
   </div>
 </template>
 
@@ -30,3 +29,4 @@
   }
 }
 </style>
+

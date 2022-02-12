@@ -37,7 +37,7 @@ export default defineComponent({
 	 width: 15%;
 }
  .day--active .day__btn {
-	 background-color: #5e2ce6;
+	 background-color: #0d6efd;
 	 color: #fff;
 }
  .day__btn {
@@ -56,7 +56,7 @@ export default defineComponent({
 	 cursor: pointer;
 }
  .day__btn:focus {
-	 box-shadow: 0 0 0.6pt 0.6pt #5e2ce6;
+	 box-shadow: 0 0 0.6pt 0.6pt #0d6efd;
 }
  .day__icon {
 	 width: 43px;

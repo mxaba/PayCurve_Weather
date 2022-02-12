@@ -155,7 +155,7 @@ export default defineComponent({
       align-items: space-evenly;
       flex-flow: column wrap;
       max-width: 230px;
-      border-left: 4px solid #5e2ce6;
+      border-left: 4px solid #0d6efd;
       padding-left: 25px;
     }
 

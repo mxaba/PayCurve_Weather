@@ -1,4 +1,3 @@
-
 <template>
   <a href="">
     <header class="top-header"></header>
@@ -27,7 +26,7 @@
         
       <div class="error__content">
         <div class="error__message message">
-          <h5 class="message__title">Loading</h5>
+          <h5 class="message__title">Not authorized</h5>
         </div>
       </div>
       
