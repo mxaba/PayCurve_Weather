@@ -4,9 +4,9 @@
 
 ## Overview 
 
-You cannot assess the fixtures of the app without logging in. The fixtures for admin are not the same as the user/client. 
+You cannot assess the fitures of the app without logging in. The fitures for admin are not the same as the user/client. 
 
-```The app shows daily and hourly weather for whole week. The hourly is in 3 hours from now on``` 
+```The app shows daily and hourly weather for whole week``` 
 
 ##### Admin view ✍🏾
 
@@ -32,11 +32,13 @@ You cannot assess the fixtures of the app without logging in. The fixtures for a
 
 ## Running the project
 
+#### Running the project
+
 ```bash
 
 git clone https://github.com/mxaba/PayCurve_Weather_App
 
-
+cd PayCurve_Weather_App
 
 ### Runing app
 
@@ -47,8 +49,6 @@ npm install
 npm run serve
 
 
-
-
 ### Runing Backend
 
 cd backend
@@ -56,6 +56,17 @@ cd backend
 npm install
 
 npm start
+
+
+### Admin Login
+email: admin@a.com
+password: admin@a.com
+
+### Client Login
+email: owethu@a.com
+password: owethu@a.com
+
+
 ```
 
 ###### The app will be runnning on http://localhost:8080/ 
