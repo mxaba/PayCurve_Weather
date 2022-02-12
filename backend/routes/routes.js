@@ -39,6 +39,24 @@ router.get('/user', async (req, res) => {
     }
 });
 
+router.get('/usersList', async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.send(users);
+    } catch (error) {
+        return res.status(400).send({ message: "Something is wrong with the server" });
+    }
+});
+
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        await User.findOneAndDelete({_id: req.params.id});
+        res.send({message: "deleted user successfully"});
+    } catch (error) {
+        return res.status(400).send({ message: "Could not delete user successfully" });
+    }
+});
+
 router.post('/logout', async (req, res) => {
     res.cookie('jwt', '', { maxAge: 0 });
     res.send({

@@ -15,7 +15,7 @@
 
         <ul class="navbar-nav me-auto mb-2 mb-md-0" v-if="auth">
           <li class="nav-item">
-            <router-link to="" class="btn btn-outline-secondary message">{{message}}!</router-link>
+            <router-link to="" class="btn btn-outline-secondary message" >{{message}}!</router-link>
           </li>
           <li class="nav-item" v-if="isAdmin">
             <router-link to="/manage" class="btn btn-dark manage">Manage-Users</router-link>

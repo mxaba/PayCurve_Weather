@@ -32,7 +32,6 @@
 
 <script lang="ts">
 import { reactive, ref } from "vue";
-import { useRouter } from "vue-router";
 import { BACKEND_URL } from '@/constraints';
 
 export default {
@@ -43,8 +42,6 @@ export default {
       password: "",
     });
     const message = ref("");
-
-    const router = useRouter();
 
     const submitFunction = async () => {
       const results = await fetch(`${BACKEND_URL}/login`, {
