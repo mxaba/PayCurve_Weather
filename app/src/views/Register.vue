@@ -51,7 +51,7 @@ export default {
     const data = reactive({
       name: "",
       email: "",
-      password: "",
+      password: ""
     });
     const message = ref("");
 
@@ -61,7 +61,7 @@ export default {
       const results = await fetch(`${BACKEND_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       });
 
       if (results.status == 200) {
@@ -74,9 +74,9 @@ export default {
     return {
       data,
       submit: submitFunction,
-      message,
+      message
     };
-  },
+  }
 };
 </script>
 

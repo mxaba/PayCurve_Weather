@@ -1,5 +1,4 @@
 <template>
-
   <section class="weather-forecast">
     <img
       :src="require(`../../assets/icons/weatherForecast/${iconCode}.svg`)"
@@ -22,64 +21,63 @@ export default defineComponent({
   props: {
     iconCode: {
       type: String,
-      required: true
+      required: true,
     },
     city: {
       type: String,
-      required: true
+      required: true,
     },
     country: {
       type: String,
-      required: true
+      required: true,
     },
     temperature: {
       type: Number,
-      required: true
+      required: true,
     },
     iconDescription: {
-      type: String
-    }
+      type: String,
+    },
   },
   setup() {
     return { calculateTemp };
-  }
+  },
 });
 </script>
 
 <style lang="css" scoped>
 .weather-forecast {
-	 width: 100%;
-	 display: flex;
-	 justify-content: center;
-	 align-items: center;
-	 flex-flow: column wrap;
-	 padding: 30px 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  padding: 30px 30px;
 }
- .weather-forecast__title {
-	 font-size: 1rem;
-	 margin-bottom: 15px;
+.weather-forecast__title {
+  font-size: 1rem;
+  margin-bottom: 15px;
 }
- .weather-forecast__icon {
-	 margin: 0;
-	 width: 100px;
-	 height: 100px;
-	 margin-bottom: 03px;
+.weather-forecast__icon {
+  margin: 0;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 03px;
 }
- .weather-forecast__temp {
-	 font-size: 1em;
-	 font-weight: bold;
+.weather-forecast__temp {
+  font-size: 1em;
+  font-weight: bold;
 }
- .weather-forecast__temp sup {
-	 font-size: 1rem;
+.weather-forecast__temp sup {
+  font-size: 1rem;
 }
- .weather-forecast__place {
-	 color: #9ca3ad;
+.weather-forecast__place {
+  color: #9ca3ad;
 }
- @media all and (min-width: 1000px) {
-	 .weather-forecast__title {
-		 margin: 0;
-		 font-size: 0.8rem;
-	}
+@media all and (min-width: 1000px) {
+  .weather-forecast__title {
+    margin: 0;
+    font-size: 0.8rem;
+  }
 }
- 
 </style>

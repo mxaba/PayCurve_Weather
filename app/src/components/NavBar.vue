@@ -18,7 +18,7 @@
             <router-link to="" class="btn btn-outline-secondary message">{{message}}!</router-link>
           </li>
           <li class="nav-item" v-if="isAdmin">
-            <router-link to="/manage" class="btn btn-dark">Manage</router-link>
+            <router-link to="/manage" class="btn btn-dark manage">Manage-Users</router-link>
           </li>
 
           <li class="nav-item">
@@ -79,6 +79,10 @@ export default {
 
 <style lang="css" scoped>
 .message{
+  margin-right: 30px;
+}
+
+.manage {
   margin-right: 30px;
 }
 </style>
