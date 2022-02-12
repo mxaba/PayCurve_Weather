@@ -55,8 +55,7 @@ export default {
       });
       console.log(results);
       if (results.status == 200) {
-        await router.push("/");
-        window.location.reload();
+        window.location.href = '/';
       } else {
         message.value = "Invalid email-address or password!";
       }

@@ -51,6 +51,7 @@ export default {
         credentials: "include",
       });
       await store.dispatch("setAuthentication", false);
+      window.location.href = '/login';
     };
 
     if (auth.value) {

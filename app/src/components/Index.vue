@@ -1,7 +1,9 @@
 <template>
   
   <Loader v-if="$store.state.loading" />
+  
   <div class="error__wrapper" v-else-if="$store.state.error">
+    <NavBar />
     <Search @search="defaultSearch"/>
     <Error />
   </div>
