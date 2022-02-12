@@ -20,8 +20,6 @@ You cannot assess the fitures of the app without logging in. The fitures for adm
 
 ## API used 🗣
 
-- Vue
-
 | Tech                                                                              | Description                                                 |
 | --------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | [locationiq](https://locationiq.com/)                                             | provides flexible enterprise-grade location based solutions.|
