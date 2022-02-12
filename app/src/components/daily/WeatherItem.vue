@@ -1,7 +1,7 @@
 <template>
   <article class="daily__hourly-weather__item">
     <span class="item__temp">{{ calculateTemp(temp, 0) }}°</span>
-    <time class="item__hour">{{ hour }}:00</time>
+    <time class="item__hour">{{ hour }}H00</time>
   </article>
 </template>
 
@@ -71,34 +71,34 @@ export default defineComponent({
     }
 
     &:first-child {
-      background: #fdb833;
+      background: #514f4b;
 
       &::after {
-        background-color: #ff9500;
+        background-color: #a5a29e;
       }
     }
 
     &:nth-child(2) {
-      background: #f525bd;
+      background: #0e0812;
 
       &::after {
-        background-color: #e82a43;
+        background-color: #969090;
       }
     }
 
     &:nth-child(3) {
-      background: #a938eb;
+      background: #6c676e;
 
       &::after {
-        background-color: #7a17b3;
+        background-color: #312836;
       }
     }
 
     &:nth-child(4) {
-      background: #5211f5;
+      background: #5f6265;
 
       &::after {
-        background-color: #33118a;
+        background-color: #a5a29e;
       }
     }
   }

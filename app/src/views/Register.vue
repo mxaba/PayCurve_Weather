@@ -34,7 +34,7 @@
         <label for="floatingPassword">Password</label>
       </div>
       <p class="fw-normal text-danger">{{ message }}</p>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+      <button class="w-100 btn btn-lg btn-warning" type="submit">Submit</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
     </form>
   </main>

@@ -19,6 +19,10 @@
       >
         Tomorrow
       </button>
+
+      <router-link to="/daily" class="btn btn-dark">
+      Weekly chart
+      </router-link>
     </div>
     <WeatherToday
       :weather="weather"

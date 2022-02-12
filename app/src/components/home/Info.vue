@@ -1,6 +1,5 @@
 <template>
   <ul class="info">
-    <span class="info__title">info</span>
     <li class="info__item">
       <span class="">wind</span>
       <img
@@ -88,11 +87,11 @@ export default defineComponent({
     padding: 5px 40px;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.3rem;
+    font-size: 0.9rem;
 
     &__icon {
-      width: 27px;
-      height: 27px;
+      width: 15px;
+      height: 15px;
     }
   }
 }

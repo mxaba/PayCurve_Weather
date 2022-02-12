@@ -1,13 +1,13 @@
 <template>
-  <section class="daily__weather-forecast">
-    <h1 class="daily__weather-forecast__title">Weekly chart</h1>
+  <section class="daily__weather-forecast" v-if="auth">
+    <h1 class="daily__weather-forecast__title">Weekly Weather</h1>
     <article class="daily__weather-forecast__wrapper">
       <img
         :src="require(`../../assets/icons/weatherForecast/${main.icon}.svg`)"
         :alt="main.iconDescription"
         class="icon"
       />
-      <span class="day-name">{{ main.day }}</span>
+      <span class="day-name">{{ main.day }} </span>
       <div class="temp">
         <span class="">maximum daily temperature</span>
         <span class="temp__max"> {{ calculateTemp(main.maxTemp, 0) }}°</span>
@@ -38,8 +38,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { calculateTemp } from "@/utils";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "WeatherForecast",
@@ -65,7 +66,9 @@ export default defineComponent({
     }
   },
   setup() {
-    return { calculateTemp };
+    const store = useStore();
+    const auth = computed(() => store.state.authenticated);
+    return { calculateTemp, auth };
   }
 });
 </script>
@@ -81,6 +84,7 @@ export default defineComponent({
   &__title {
     font-size: 1.5rem;
     padding: 0 30px;
+    color: rgb(89, 95, 89);
   }
 
   &__wrapper {
@@ -94,7 +98,8 @@ export default defineComponent({
       justify-self: start;
       font-weight: bold;
       font-size: 1.3rem;
-      padding-left: 17px;
+      padding-left: 2px;
+      padding-right: 10px;
     }
     .icon {
       width: 65px;
@@ -102,13 +107,13 @@ export default defineComponent({
     }
 
     .temp {
-      font-size: 1.3em;
+      font-size: 1em;
       justify-self: end;
-      padding-right: 5px;
+      padding-right: 1px;
 
       &__max {
         color: #d11d22;
-        padding: 0 8px;
+        padding: 0 4px;
       }
 
       &__min {

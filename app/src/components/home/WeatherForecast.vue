@@ -53,24 +53,24 @@ export default defineComponent({
 	 justify-content: center;
 	 align-items: center;
 	 flex-flow: column wrap;
-	 padding: 30px 0;
+	 padding: 30px 30px;
 }
  .weather-forecast__title {
 	 font-size: 1rem;
 	 margin-bottom: 15px;
 }
  .weather-forecast__icon {
-	 margin: 10px;
+	 margin: 0;
 	 width: 100px;
 	 height: 100px;
-	 margin-bottom: 0;
+	 margin-bottom: 03px;
 }
  .weather-forecast__temp {
-	 font-size: 3em;
+	 font-size: 1em;
 	 font-weight: bold;
 }
  .weather-forecast__temp sup {
-	 font-size: 1.5rem;
+	 font-size: 1rem;
 }
  .weather-forecast__place {
 	 color: #9ca3ad;

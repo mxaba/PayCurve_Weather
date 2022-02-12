@@ -1,6 +1,6 @@
 <template>
   <article class="hourly__weather">
-    <h3 className="">Hourly weather tomorrow</h3>
+    <h3 className=""></h3>
     <WeatherItem
       v-for="(item, index) in weather.filter((item, itemIndex) =>
         availableIndexes.includes(itemIndex)

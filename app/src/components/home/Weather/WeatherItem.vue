@@ -1,6 +1,6 @@
 <template>
   <article class="hourly__weather__item">
-    <time class="hourly__weather__item__time">{{ time }}:00</time>
+    <time class="hourly__weather__item__time">{{ time }}H00</time>
     <img
       :src="require(`../../../assets/icons/weatherForecast/${icon}.svg`)"
       :alt="iconDescription"
@@ -54,7 +54,7 @@ export default defineComponent({
   align-items: center;
   flex-flow: column wrap;
   z-index: -2;
-  color: #fff;
+  color: rgb(255, 255, 255);
   font-weight: bold;
 
   &::after {
@@ -65,28 +65,28 @@ export default defineComponent({
   }
 
   &:nth-child(2) {
-    background: #f59518;
+    background: #6f6b65;
 
     &::after {
       height: 100%;
       top: 50%;
-      background: #eb6952;
+      background: #18100e;
       border-radius: 50px 0 0 0;
     }
   }
 
   &:nth-child(3) {
-    background: #a455c9;
+    background: #000000;
 
     &::after {
       height: 100%;
       top: 50%;
-      background: #6314c9;
+      background: #77737d;
     }
   }
 
   &:nth-child(4) {
-    background: #2c2666;
+    background: #000000;
 
     &::after {
       height: 50%;

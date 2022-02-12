@@ -9,12 +9,10 @@
     <NavBar />
     <Search @search="defaultSearch" />
     <router-view></router-view>
-    <!-- <Navbar /> -->
   </div>
 </template>
 
 <script lang="ts">
-import Navbar from "@/components/Navbar/Navbar.vue";
 import NavBar from "@/components/NavBar.vue";
 import Error from "@/components/Error.vue";
 import Loader from "@/components/Loader.vue";
@@ -29,7 +27,6 @@ export default defineComponent({
   name: "Main",
   components: {
     NavBar,
-    // Navbar,
     Loader,
     Search,
     Error,

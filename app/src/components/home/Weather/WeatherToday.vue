@@ -1,6 +1,6 @@
 <template>
   <article class="hourly__weather">
-    <h3 className="">Hourly weather today</h3>
+    <h3 className=""></h3>
     <WeatherItem
       v-for="(item, index) in weather.slice(1, 4)"
       :key="item.dt"

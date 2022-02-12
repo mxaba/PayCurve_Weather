@@ -34,10 +34,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 
 .day {
-	 width: 15%;
+	 width: 20%;
 }
  .day--active .day__btn {
-	 background-color: #0d6efd;
+	 background-color: #5d6775;
 	 color: #fff;
 }
  .day__btn {
@@ -56,7 +56,7 @@ export default defineComponent({
 	 cursor: pointer;
 }
  .day__btn:focus {
-	 box-shadow: 0 0 0.6pt 0.6pt #0d6efd;
+	 box-shadow: 0 0 0.6pt 0.6pt #020914;
 }
  .day__icon {
 	 width: 43px;
