@@ -1,25 +1,24 @@
 <template>
-  <Main />
+  <Index />
 </template>
 
 <script lang="ts">
-import Main from "@/components/Main.vue";
+import Index from "@/components/Index.vue";
 export default {
   components: {
-    Main,
+    Index,
   },
 };
 </script>
 
 <style lang="css">
-@import url("https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap");
 
 body {
   padding: 0;
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,15 +35,4 @@ button:focus {
   outline: 1px solid #000;
 }
 
-#app::after {
-  z-index: -5;
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-top: 90vh solid #ebedf1;
-  border-right: 100vw solid transparent;
-  top: 0;
-  left: 0;
-}
 </style>

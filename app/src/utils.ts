@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOCATION_API_URL, LOCATION_API_KEY } from "./consts";
+import { LOCATION_API_URL, LOCATION_API_KEY } from "./constraints";
 import type { DailyWeatherItem } from "./allTypes";
 
 export const getCityNameByCoordinates = async ({ latitude, longitude }: {latitude: number, longitude: number}) => {

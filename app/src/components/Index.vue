@@ -1,11 +1,13 @@
 <template>
+  
   <Loader v-if="$store.state.loading" />
   <div class="error__wrapper" v-else-if="$store.state.error">
-    <Search @search="defaultSearch" @search-by-location="searchByLocation" />
+    <Search @search="defaultSearch"/>
     <Error />
   </div>
   <div v-else>
-    <Search @search="defaultSearch" @search-by-location="searchByLocation" />
+    <NavBar />
+    <Search @search="defaultSearch" />
     <router-view></router-view>
     <Navbar />
   </div>
@@ -13,6 +15,7 @@
 
 <script lang="ts">
 import Navbar from "@/components/Navbar/Navbar.vue";
+import NavBar from "@/components/NavBar.vue";
 import Error from "@/components/Error.vue";
 import Loader from "@/components/Loader.vue";
 import Search from "@/components/Search/Search.vue";
@@ -23,6 +26,7 @@ import { getCityNameByCoordinates } from "@/utils";
 export default defineComponent({
   name: "Main",
   components: {
+    NavBar,
     Navbar,
     Loader,
     Search,
@@ -58,27 +62,7 @@ export default defineComponent({
     //first search
     defaultSearch("Cape Town");
 
-    async function searchByLocation() {
-      store.dispatch("setLoading", true);
-
-      if (!("geolocation" in navigator)) {
-        store.dispatch("setError", true);
-        return;
-      }
-
-      await navigator.geolocation.getCurrentPosition(
-        async ({ coords }) => {
-          const { address } = await getCityNameByCoordinates(coords);
-          return await defaultSearch(address.city);
-        },
-        () => {
-          store.dispatch("setLoading", false);
-          store.dispatch("setError", true);
-        }
-      );
-    }
-
-    return { defaultSearch, searchByLocation };
+    return { defaultSearch };
   },
 });
 </script>
